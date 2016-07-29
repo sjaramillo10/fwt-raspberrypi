@@ -3,7 +3,7 @@ clear all;
 sig = 'db10';
 load db10;
 S=db10;
-name = strcat(sig,'_bank.txt');
+name = strcat(sig,'filter_bank.txt');
 file = fopen(name,'w');
 for i=1:length(S)
     fprintf(file,'%f\n',S(i));
