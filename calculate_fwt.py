@@ -1,11 +1,34 @@
 import spidev
 import sys,time
+import numpy as np
+
+detail=7
 
 signalfile = open('signal_bank.txt','rb')
 Signal = list(signalfile.readlines())
+Signal = map(lambda s:s.strip(), Signal)
+Signal = list(map(float, Signal))
 
 filterfile = open('filter_bank.txt','rb')
-Filter = list(filterlfile.readlines())
+Filter = list(filterfile.readlines())
+Filter = map(lambda s:s.strip(), Filter)
+Filter = list(map(float, Filter))
 
-print Signal[0]
-print Filter[0]
+LP_filter = Filter
+HP_filter = LP_filter[::-1]				#Reverse
+
+out = []
+
+for i in range(detail):
+	out.append([])
+	out.append([])
+	aux1 = np.convolve(Signal,HP_filter, 'same') #same len of the bigger 
+	aux2 = np.convolve(Signal,LP_filter, 'same') #same len of the bigger 
+	out[2*i] = list(aux1[::2])
+	out[2*i+1] = list(aux2[::2])
+	Signal = list(aux2[::2])
+
+for value in out:
+	print len(value)
+	
+#FUCK
