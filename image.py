@@ -37,13 +37,13 @@ for s in s7:
     scale7 += [s]*256
 
 lst = []
-lst += scale7*90
-lst += scale6*90
-lst += scale5*90
-lst += scale4*90
-lst += scale3*90
-lst += scale2*90
 lst += scale1*90
+lst += scale2*90
+lst += scale3*90
+lst += scale4*90
+lst += scale5*90
+lst += scale6*90
+lst += scale7*90
 
 #print img
 
