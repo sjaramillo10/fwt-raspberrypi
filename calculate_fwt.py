@@ -14,16 +14,16 @@ Filter = list(filterfile.readlines())
 Filter = map(lambda s:s.strip(), Filter)
 Filter = list(map(float, Filter))
 
-LP_filter = Filter
-HP_filter = LP_filter[::-1]				#Reverse
+LP_filter = Filter[:len(Filter)/2]
+HP_filter = Filter[len(Filter)/2:]
 
 out = []
 
 for i in range(detail):
 	out.append([])
 	out.append([])
-	aux1 = np.convolve(Signal,HP_filter, 'same') #same len of the bigger 
-	aux2 = np.convolve(Signal,LP_filter, 'same') #same len of the bigger 
+	aux1 = np.convolve(Signal,HP_filter, 'full') #same len of the bigger 
+	aux2 = np.convolve(Signal,LP_filter, 'full') #same len of the bigger 
 	out[2*i] = list(aux1[::2])
 	out[2*i+1] = list(aux2[::2])
 	Signal = list(aux2[::2])
